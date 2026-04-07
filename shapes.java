@@ -1,37 +1,74 @@
-// Shapes.java
+import java.util.Scanner;
+
 class Shapes {
-    double area;
+    double length, breadth, radius;
 
-    // Constructor Overloading: No-arg constructor
-    Shapes() {
-        System.out.println("--- Calculating Areas ---");
+    // Constructor for Rectangle
+    Shapes(double l, double b) {
+        length = l;
+        breadth = b;
     }
 
-    // Method Overloading: Area of a Square (one parameter)
-    void calculateArea(double side) {
-        area = side * side;
-        System.out.println("Area of Square: " + area);
+    // Constructor for Square
+    Shapes(double side) {
+        length = side;
     }
 
-    // Method Overloading: Area of a Rectangle (two parameters)
-    void calculateArea(double length, double width) {
-        area = length * width;
-        System.out.println("Area of Rectangle: " + area);
+    // Constructor for Circle
+    Shapes(double r, boolean isCircle) {
+        radius = r;
     }
 
-    // Method Overloading: Area of a Circle (different parameter type or logic)
-    // Using a float to distinguish from the square's double parameter
-    void calculateArea(float radius) {
-        area = 3.14 * radius * radius;
-        System.out.println("Area of Circle: " + area);
+    // Method Overloading
+    double area(double l, double b) {
+        return l * b;
+    }
+
+    double area(double side) {
+        return side * side;
+    }
+
+    double areaCircle(double r) {
+        return 3.14 * r * r;
     }
 
     public static void main(String[] args) {
-        Shapes myShape = new Shapes(); // Calls no-arg constructor
-        
-        // Calling overloaded methods
-        myShape.calculateArea(5.0);        // Square
-        myShape.calculateArea(10.0, 4.0);  // Rectangle
-        myShape.calculateArea(7.0);       // Circle
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Choose Shape:");
+        System.out.println("1. Rectangle");
+        System.out.println("2. Square");
+        System.out.println("3. Circle");
+        int choice = sc.nextInt();
+
+        switch (choice) {
+            case 1:
+                System.out.print("Enter length: ");
+                double l = sc.nextDouble();
+                System.out.print("Enter breadth: ");
+                double b = sc.nextDouble();
+                Shapes rect = new Shapes(l, b);
+                System.out.println("Area of Rectangle: " + rect.area(l, b));
+                break;
+
+            case 2:
+                System.out.print("Enter side: ");
+                double s = sc.nextDouble();
+                Shapes square = new Shapes(s);
+                System.out.println("Area of Square: " + square.area(s));
+                break;
+
+            case 3:
+                System.out.print("Enter radius: ");
+                double r = sc.nextDouble();
+                Shapes circle = new Shapes(r, true);
+                System.out.println("Area of Circle: " + circle.areaCircle(r));
+                break;
+
+            default:
+                System.out.println("Invalid choice!");
+        }
+
+        sc.close();
     }
 }
